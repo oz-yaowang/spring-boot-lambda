@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: ${spring_profiles_active:dev}
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test;MODE=MYSQL;DB_CLOSE_ON_EXIT=TRUE;
+    username: sa
+    password:
+    schema: classpath:sql/schema.sql
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
+---
+
+spring:
+  profiles: dev
+com:
+  huirongxing:
+    data: devData
+
+---
+
+spring:
+  profiles: qa
+com:
+  huirongxing:
+    data: qaData212223333333333333
+---
+
+spring:
+  profiles: uat
+com:
+  huirongxing:
+    data: uatData

@@ -1,0 +1,114 @@
+ext {
+    junit_jupiter_version = "5.1.0"
+    junit_platform_version = "1.1.0"
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.0.RELEASE")
+//        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.2'
+
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
+apply plugin: "jacoco"
+//apply plugin: 'com.github.johnrengelman.shadow'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude(group: 'org.apache.tomcat.embed')
+    }
+    compile("com.amazonaws.serverless:aws-serverless-java-container-spring:1.0")
+    compile("io.symphonia:lambda-logging:1.0.1")
+
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1')
+
+    testCompile("org.springframework.boot:spring-boot-starter-test") {
+        exclude(group: 'junit', module: 'junit')
+    }
+
+    /**
+     * test complie
+     */
+    //Junit 5 platform core
+    testCompile("org.junit.platform:junit-platform-engine:${junit_platform_version}")
+    testCompile("org.junit.platform:junit-platform-launcher:${junit_platform_version}")
+
+    //Junit 5 dependency
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junit_jupiter_version}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junit_jupiter_version}")
+
+//    	如果想要继续兼容JUnit3 , 4 版本，添加如下dependency
+//    testCompile("junit:junit:4.12")
+//    testRuntime("org.junit.vintage:junit-vintage-engine:5.1.0")
+
+
+    compile('com.h2database:h2:1.4.196')
+
+
+}
+
+/**
+ * build to zip
+ */
+task buildZip(type: Zip) {
+    from compileJava
+    from processResources
+    into('lib') {
+        from configurations.runtime
+    }
+}
+
+build.dependsOn buildZip
+
+/**
+ * 开启gradle Junit 命令行测试
+ */
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+
+jacocoTestReport.doFirst {
+    classDirectories = files(['build/classes/java/main/com/huirongxing/springboot/service', 'build/classes/java/main/com/huirongxing/springboot/model'])
+}
+
+/**
+ * 使用Jacoco检查代码覆盖率
+ */
+jacoco {
+    toolVersion = "0.8.0"
+}
+//
+//jacocoTestReport {
+//    reports {
+//        xml.enabled true
+//        csv.enabled true
+////        html.destination file("${buildDir}/jacocoHtml")
+//    }
+//}
+
+
+
+

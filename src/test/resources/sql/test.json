@@ -1,0 +1,36 @@
+{
+  "resource": "/envdata",
+  "path": "/envdata",
+  "httpMethod": "GET",
+  "headers": null,
+  "queryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "path": "/envdata",
+    "accountId": "154240911733",
+    "resourceId": "vomh2a",
+    "stage": "test-invoke-stage",
+    "requestId": "test-invoke-request",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "cognitoIdentityId": null,
+      "apiKey": "test-invoke-api-key",
+      "cognitoAuthenticationType": null,
+      "userArn": "arn:aws:iam::154240911733:user/hteamadmin",
+      "apiKeyId": "test-invoke-api-key-id",
+      "userAgent": "aws-internal/3",
+      "accountId": "154240911733",
+      "caller": "AIDAIK7NMCWZJT3JD2K3C",
+      "sourceIp": "test-invoke-source-ip",
+      "accessKey": "ASIAI4HI5G4MFKCXT3YQ",
+      "cognitoAuthenticationProvider": null,
+      "user": "AIDAIK7NMCWZJT3JD2K3C"
+    },
+    "resourcePath": "/envdata",
+    "httpMethod": "GET",
+    "apiId": "laa3a4egof"
+  },
+  "body": null,
+  "isBase64Encoded": false
+}
