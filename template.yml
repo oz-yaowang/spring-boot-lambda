@@ -1,17 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
-Parameters:
-  ProjectId:
-    Description: AWS CodeStar projectID used to associate new resources to team members
-    Type: String
 Resources:
   GetEnvData:
     Type: AWS::Serverless::Function
     Properties:
       Handler: com.huirongxing.springboot.StreamLambdaHandler
       Runtime: java8
-      Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
       Events:
         GetEvent:
           Type: Api
