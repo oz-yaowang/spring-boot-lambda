@@ -5,8 +5,10 @@ Resources:
   GetEnvData:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: com.huirongxing.springboot.StreamLambdaHandler
+      Handler: com.huirongxing.springboot.StreamLambdaHandler::handleRequest
       Runtime: java8
+      Timeout : 30
+      MemorySize: 1024
       Events:
         GetEvent:
           Type: Api
