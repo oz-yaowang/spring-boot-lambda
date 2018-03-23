@@ -1,10 +1,4 @@
 AWSTemplateFormatVersion: 2010-09-09
-
-Parameters:
-  ProjectId:
-    Type: String
-    Description: AWS CodeStar projectID used to associate new resources to team members
-
 Resources:
   GetEnvData:
     Type: AWS::Serverless::Function
